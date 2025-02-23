@@ -67,11 +67,5 @@ void ASurroundedPlayerController::Move(const FInputActionValue& Value)
 
 void ASurroundedPlayerController::Look(const FInputActionValue& Value)
 {
-	const FVector2D InputAxisVector = Value.Get<FVector2D>();
-
-	if(APawn* ControlledPawn = GetPawn<APawn>())
-	{
-		ControlledPawn->AddControllerYawInput(InputAxisVector.X);
-		ControlledPawn->AddControllerPitchInput(InputAxisVector.Y);
-	}
+	
 }
