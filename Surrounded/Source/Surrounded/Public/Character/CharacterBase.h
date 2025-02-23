@@ -17,7 +17,6 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
-
 public:
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	TObjectPtr<USkeletalMeshComponent> Weapon;
@@ -26,7 +25,7 @@ public:
 	 * Attach the weapon to this socket name on character's skeletal mesh.
 	 */ 
 	UPROPERTY(EditDefaultsOnly, Category = "Combat")
-	FName SocketName = "weapon_main";
+	FName WeaponSocket = "weapon_main";
 
 	
 

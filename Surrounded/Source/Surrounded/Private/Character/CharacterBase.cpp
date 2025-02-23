@@ -3,12 +3,13 @@
 
 #include "Character/CharacterBase.h"
 
+
 ACharacterBase::ACharacterBase()
 {
 	PrimaryActorTick.bCanEverTick = false;
 	
 	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>("Weapon");
-	Weapon->SetupAttachment(GetMesh(), SocketName);
+	Weapon->SetupAttachment(GetMesh(), WeaponSocket);
 	Weapon->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	
 }
@@ -16,6 +17,7 @@ ACharacterBase::ACharacterBase()
 void ACharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
+	
 	
 }
 

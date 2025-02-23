@@ -6,9 +6,9 @@
 #include "Character/CharacterBase.h"
 #include "PlayerCharacter.generated.h"
 
-/**
- * 
- */
+class USpringArmComponent;
+class UCameraComponent;
+
 UCLASS()
 class SURROUNDED_API APlayerCharacter : public ACharacterBase
 {
@@ -16,4 +16,13 @@ class SURROUNDED_API APlayerCharacter : public ACharacterBase
 
 public:
 	APlayerCharacter();
+	
+public:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
+	USpringArmComponent* SpringArm;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
+	UCameraComponent* Camera;
+	
+	
 };
