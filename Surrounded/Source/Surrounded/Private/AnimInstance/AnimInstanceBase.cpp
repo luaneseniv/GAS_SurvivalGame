@@ -2,7 +2,7 @@
 
 
 #include "AnimInstance/AnimInstanceBase.h"
-#include "Character/CharacterBase.h"
+#include "Character/SrdCharacterBase.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 
@@ -10,7 +10,7 @@ void UAnimInstanceBase::NativeInitializeAnimation()
 {
 	Super::NativeInitializeAnimation();
 	
-	if (ACharacterBase* Character = Cast<ACharacterBase>(TryGetPawnOwner()))
+	if (ASrdCharacterBase* Character = Cast<ASrdCharacterBase>(TryGetPawnOwner()))
 		MovementComponent = Character->GetCharacterMovement();
 }
 
