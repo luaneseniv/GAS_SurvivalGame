@@ -2,8 +2,6 @@
 
 
 #include "Character/PlayerCharacter.h"
-
-#include "EnhancedInputSubsystems.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -27,6 +25,8 @@ APlayerCharacter::APlayerCharacter()
 	 * Pawn
 	 * Movement Component
 	 */
+	Camera->bUsePawnControlRotation = false;
+	
 	SpringArm->bInheritYaw = false;
 	SpringArm->bInheritRoll = false;
 	SpringArm->bInheritPitch = false;

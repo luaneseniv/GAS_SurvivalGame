@@ -18,8 +18,8 @@ void UAnimInstanceBase::NativeUpdateAnimation(float DeltaSeconds)
 {
 	Super::NativeUpdateAnimation(DeltaSeconds);
 
-	check(MovementComponent)
-	// if (MovementComponent == nullptr) return;
+	//check(MovementComponent) // DEBUG
+	if (MovementComponent == nullptr) return;
 	MovementSpeed = MovementComponent->Velocity.Size2D();
 	bShouldMove = MovementSpeed > 0.0f;
 	

@@ -4,12 +4,14 @@
 #include "Gameplay/SurroundedPlayerController.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "Gameplay/Interface/InteractInterface.h"
 
 
 
 ASurroundedPlayerController::ASurroundedPlayerController()
 {
 	bReplicates = true;
+	
 }
 
 void ASurroundedPlayerController::BeginPlay()
@@ -47,6 +49,14 @@ void ASurroundedPlayerController::SetupInputComponent()
 	EnhancedInputComponent->BindAction(LookAction,ETriggerEvent::Triggered, this,&ASurroundedPlayerController::Look);
 }
 
+void ASurroundedPlayerController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	CursorTrace();
+	
+}
+
 
 void ASurroundedPlayerController::Move(const FInputActionValue& Value)
 {
@@ -67,5 +77,48 @@ void ASurroundedPlayerController::Move(const FInputActionValue& Value)
 
 void ASurroundedPlayerController::Look(const FInputActionValue& Value)
 {
+	
+}
+
+void ASurroundedPlayerController::CursorTrace()
+{
+	FHitResult HitResult;
+
+	GetHitResultUnderCursor(ECC_Visibility, false,HitResult);
+	if(!HitResult.bBlockingHit) return;
+
+	PreviousHitActor = CurrentHitActor;
+	CurrentHitActor = HitResult.GetActor();
+	
+	/*
+	 * 1. Current == previous
+	 *	 1.a (Current == null) =>> Do nothing
+	 *	 1.b (Current != null) =>> Do nothing
+	 *		
+	 * 2. Current != previous
+	 *		2.a (Current != nullptr && Previous != nullptr) =>> Current->Highlight, previous->UnHighlight
+	 *		2.b (Current != nullptr && Previous == nullptr) =>> Current->Highlight
+	 *		2.c (Current == nullptr && Previous != nullptr) =>> previous->UnHighlight
+	 *		
+	 */
+
+	if (CurrentHitActor != PreviousHitActor)
+	{
+		if (CurrentHitActor != nullptr && PreviousHitActor != nullptr)
+		{
+			CurrentHitActor->I_HighlightActor();
+			PreviousHitActor->I_UnHighlightActor();
+		}
+		else if (CurrentHitActor != nullptr && PreviousHitActor == nullptr)
+		{
+			CurrentHitActor->I_HighlightActor();
+		}
+		else if (CurrentHitActor == nullptr && PreviousHitActor != nullptr)
+		{
+			PreviousHitActor->I_UnHighlightActor();
+		}
+	}
+	
+	
 	
 }

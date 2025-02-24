@@ -9,6 +9,7 @@
 class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
+class IInteractInterface;
 
 UCLASS()
 class SURROUNDED_API ASurroundedPlayerController : public APlayerController
@@ -21,9 +22,9 @@ public:
 protected:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
+	virtual void Tick(float DeltaTime) override;
 
 private:
-	// ********* Variables *********
 	UPROPERTY(EditAnywhere, Category = "Enhanced Input")
 	TObjectPtr<UInputMappingContext> InputMappingContext;
 
@@ -33,14 +34,33 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Enhanced Input", meta=(DisplayName="Input Action Look"))
 	TObjectPtr<UInputAction> LookAction;
 
+	UPROPERTY(EditAnywhere, Category = "Trace Hit")
+	TArray<TEnumAsByte<EObjectTypeQuery>> TraceObjectTypes;
+
+#pragma region Interfaces
+	
+	UPROPERTY()
+	TScriptInterface<IInteractInterface> PreviousHitActor;
+	
+	UPROPERTY()
+	TScriptInterface<IInteractInterface> CurrentHitActor;
+	
+#pragma endregion
+
 private:
-	// ********* FUNCTIONS *********
 	UFUNCTION()
 	void Move(const FInputActionValue& Value);
 	
 	UFUNCTION()
 	void Look(const FInputActionValue& Value);
 
+	UFUNCTION()
+	void CursorTrace();
+
 
 	
 };
+
+
+
+
