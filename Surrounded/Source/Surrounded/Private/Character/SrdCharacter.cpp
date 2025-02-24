@@ -5,11 +5,11 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Gameplay/SrdPlayerState.h"
+#include "Gameplay/AbilitySystem/SrdAbilitySystemComponent.h"
 
 ASrdCharacter::ASrdCharacter()
 {
-	PrimaryActorTick.bCanEverTick = false;
-
 	// Setup Spring Arm and Camera for Top-Down
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
 	SpringArm->SetupAttachment(RootComponent);
@@ -42,5 +42,42 @@ ASrdCharacter::ASrdCharacter()
 	GetCharacterMovement()->bSnapToPlaneAtStart = true;
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->RotationRate = FRotator(0.0, 450.0, 0.0);
+	
+}
+
+void ASrdCharacter::InitAbilityActorInfo()
+{
+	ASrdPlayerState* SrdPlayerState = GetPlayerState<ASrdPlayerState>();
+	check(SrdPlayerState); // debug
+	if (SrdPlayerState)
+	{
+		// SrdPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(SrdPlayerState, this);
+		
+		AbilitySystemComponent = SrdPlayerState->GetAbilitySystemComponent();
+		AttributeSet = SrdPlayerState->GetAttributeSet();
+
+		AbilitySystemComponent->InitAbilityActorInfo(SrdPlayerState, this);
+	}
+}
+
+void ASrdCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	InitAbilityActorInfo();
+}
+
+void ASrdCharacter::OnRep_PlayerState()
+{
+	Super::OnRep_PlayerState();
+
+	InitAbilityActorInfo();
+}
+
+
+void ASrdCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+
 	
 }

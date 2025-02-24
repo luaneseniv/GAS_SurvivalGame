@@ -4,30 +4,24 @@
 
 #include "CoreMinimal.h"
 #include "AbilitySystemInterface.h"
-#include "GameFramework/Character.h"
-#include "SrdCharacterBase.generated.h"
+#include "GameFramework/PlayerState.h"
+#include "SrdPlayerState.generated.h"
 
 class UAbilitySystemComponent;
 class UAttributeSet;
 
-UCLASS(Abstract)
-class SURROUNDED_API ASrdCharacterBase : public ACharacter, public IAbilitySystemInterface
+UCLASS()
+class SURROUNDED_API ASrdPlayerState : public APlayerState, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
 public:
-	ASrdCharacterBase();
+	ASrdPlayerState();
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	UAttributeSet* GetAttributeSet() const {return AttributeSet;}
 
-protected:
-	virtual void BeginPlay() override;
-
-	/* * Weapon will be attached to Character Skeletal mesh via socket named "weapon_main" by default*/
-	UPROPERTY(EditAnywhere, Category = "Combat")
-	TObjectPtr<USkeletalMeshComponent> Weapon;
 	
-
+protected:
 	UPROPERTY()
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 	
@@ -35,4 +29,8 @@ protected:
 	TObjectPtr<UAttributeSet> AttributeSet;
 	
 
+
+
+	
+	
 };

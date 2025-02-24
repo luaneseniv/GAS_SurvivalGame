@@ -16,13 +16,14 @@ class SURROUNDED_API ASrdEnemy : public ASrdCharacterBase, public IInteractInter
 public:
 	ASrdEnemy();
 	virtual void BeginPlay() override;
-	
+
+	// ~ Interfaces
 	UFUNCTION()
 	virtual void I_HighlightActor() override;
 	
 	UFUNCTION()
 	virtual void I_UnHighlightActor() override;
-
+	// ~ End Interfaces
 	
 	
 };

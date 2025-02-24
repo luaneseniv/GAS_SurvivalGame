@@ -57,7 +57,6 @@ void ASrdController::Tick(float DeltaTime)
 	
 }
 
-
 void ASrdController::Move(const FInputActionValue& Value)
 {
 	const FVector2D InputAxisVector = Value.Get<FVector2D>();

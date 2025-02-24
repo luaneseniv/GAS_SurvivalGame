@@ -25,6 +25,7 @@ protected:
 	virtual void Tick(float DeltaTime) override;
 
 private:
+	// ~ Enhanced input
 	UPROPERTY(EditAnywhere, Category = "Enhanced Input")
 	TObjectPtr<UInputMappingContext> InputMappingContext;
 
@@ -33,6 +34,7 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Enhanced Input", meta=(DisplayName="Input Action Look"))
 	TObjectPtr<UInputAction> LookAction;
+	// ~ End Enhanced input
 
 	UPROPERTY(EditAnywhere, Category = "Trace Hit")
 	TArray<TEnumAsByte<EObjectTypeQuery>> TraceObjectTypes;
