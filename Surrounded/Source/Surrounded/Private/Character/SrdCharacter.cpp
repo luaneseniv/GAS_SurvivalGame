@@ -51,15 +51,16 @@ void ASrdCharacter::InitAbilityActorInfo()
 	check(SrdPlayerState); // debug
 	if (SrdPlayerState)
 	{
-		// SrdPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(SrdPlayerState, this);
+		//SrdPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(SrdPlayerState, this);
 		
 		AbilitySystemComponent = SrdPlayerState->GetAbilitySystemComponent();
 		AttributeSet = SrdPlayerState->GetAttributeSet();
-
+		
 		AbilitySystemComponent->InitAbilityActorInfo(SrdPlayerState, this);
 	}
 }
 
+// Setup ASC on the server
 void ASrdCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
@@ -67,6 +68,7 @@ void ASrdCharacter::PossessedBy(AController* NewController)
 	InitAbilityActorInfo();
 }
 
+// Setup ASC on client
 void ASrdCharacter::OnRep_PlayerState()
 {
 	Super::OnRep_PlayerState();
