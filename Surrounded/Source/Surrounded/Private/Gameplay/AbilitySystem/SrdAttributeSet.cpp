@@ -6,10 +6,12 @@
 
 USrdAttributeSet::USrdAttributeSet()
 {
-	InitHealth(100.0f);
+	InitHealth(15.0f);
 	InitMaxHealth(100.0f);
-	InitMana(100.0f);
-	InitMaxMana(100.0f);
+	InitMana(15.0f);
+	InitMaxMana(60.0f);
+	InitExp(5.0f);
+	InitMaxExp(100.0f);
 }
 
 void USrdAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -20,6 +22,8 @@ void USrdAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 	DOREPLIFETIME_CONDITION_NOTIFY(USrdAttributeSet, MaxHealth, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(USrdAttributeSet, Mana, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(USrdAttributeSet, MaxMana, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(USrdAttributeSet, Exp, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(USrdAttributeSet, MaxExp, COND_None, REPNOTIFY_Always)
 }
 
 void USrdAttributeSet::OnRep_Health(const FGameplayAttributeData& OldHealth) const
@@ -40,4 +44,14 @@ void USrdAttributeSet::OnRep_Mana(const FGameplayAttributeData& OldMana) const
 void USrdAttributeSet::OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(USrdAttributeSet, MaxMana, OldMaxMana);
+}
+
+void USrdAttributeSet::OnRep_Exp(const FGameplayAttributeData& OldExp) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(USrdAttributeSet, Exp, OldExp);
+}
+
+void USrdAttributeSet::OnRep_MaxExp(const FGameplayAttributeData& OldMaxExp) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(USrdAttributeSet, MaxExp, OldMaxExp);
 }

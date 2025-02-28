@@ -22,8 +22,8 @@ void ASrdController::BeginPlay()
 
 	// Add input mapping context
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
-	check(Subsystem);
-	Subsystem->AddMappingContext(InputMappingContext, 0);
+	if(Subsystem)
+		Subsystem->AddMappingContext(InputMappingContext, 0);
 	
 	// Always show mouse cursor
 	bShowMouseCursor = true;

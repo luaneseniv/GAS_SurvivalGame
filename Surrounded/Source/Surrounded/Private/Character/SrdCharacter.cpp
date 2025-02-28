@@ -5,8 +5,10 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Gameplay/SrdController.h"
 #include "Gameplay/SrdPlayerState.h"
 #include "Gameplay/AbilitySystem/SrdAbilitySystemComponent.h"
+#include "UI/HUD/SrdHUD.h"
 
 ASrdCharacter::ASrdCharacter()
 {
@@ -48,15 +50,21 @@ ASrdCharacter::ASrdCharacter()
 void ASrdCharacter::InitAbilityActorInfo()
 {
 	ASrdPlayerState* SrdPlayerState = GetPlayerState<ASrdPlayerState>();
-	check(SrdPlayerState); // debug
 	if (SrdPlayerState)
 	{
 		//SrdPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(SrdPlayerState, this);
-		
 		AbilitySystemComponent = SrdPlayerState->GetAbilitySystemComponent();
 		AttributeSet = SrdPlayerState->GetAttributeSet();
-		
+
+		// for player character. Owner will be PlayerState, Avatar will be PlayerCharacter
 		AbilitySystemComponent->InitAbilityActorInfo(SrdPlayerState, this);
+
+		// Create new OverlayWidget and add to viewport
+		// Also construct necessary params for OverlayWidgetController
+		if (ASrdController* SrdController = Cast<ASrdController>(GetController()))
+			if (ASrdHUD* SrdHUD = SrdController->GetHUD<ASrdHUD>())
+				SrdHUD->InitOverlayWidget(SrdController, SrdPlayerState, AbilitySystemComponent, AttributeSet);
+		
 	}
 }
 

@@ -7,7 +7,7 @@
 #include "AbilitySystemComponent.h"
 #include "SrdAttributeSet.generated.h"
 
-
+// will be changed to ATTRIBUTE_ACCESSORS_BASIC in UE5.6
 #define ATTRIBUTE_ACCESSORS(ClassName, PropertyName) \
 	GAMEPLAYATTRIBUTE_PROPERTY_GETTER(ClassName, PropertyName) \
 	GAMEPLAYATTRIBUTE_VALUE_GETTER(PropertyName) \
@@ -43,6 +43,15 @@ public:
 	FGameplayAttributeData MaxMana;
 	ATTRIBUTE_ACCESSORS(USrdAttributeSet, MaxMana);
 
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Exp, Category = "Essential Attributes")
+	FGameplayAttributeData Exp;
+	ATTRIBUTE_ACCESSORS(USrdAttributeSet, Exp);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MaxExp, Category = "Essential Attributes")
+	FGameplayAttributeData MaxExp;
+	ATTRIBUTE_ACCESSORS(USrdAttributeSet, MaxExp);
+	
+
 	// =========================
 	// Called OnRep
 	// =========================
@@ -57,6 +66,12 @@ public:
 
 	UFUNCTION()
 	void OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const;
+
+	UFUNCTION()
+	void OnRep_Exp(const FGameplayAttributeData& OldExp) const;
+
+	UFUNCTION()
+	void OnRep_MaxExp(const FGameplayAttributeData& OldMaxExp) const;
 	
 };
 

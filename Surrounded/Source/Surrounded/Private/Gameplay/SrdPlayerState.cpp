@@ -9,7 +9,7 @@
 ASrdPlayerState::ASrdPlayerState()
 {
 	AbilitySystemComponent = CreateDefaultSubobject<USrdAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
-	AbilitySystemComponent->SetIsReplicated(true);
+	AbilitySystemComponent->SetIsReplicated(true); // Enable remote role
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Mixed);
 
 	AttributeSet = CreateDefaultSubobject<USrdAttributeSet>(TEXT("AttributeSet"));
