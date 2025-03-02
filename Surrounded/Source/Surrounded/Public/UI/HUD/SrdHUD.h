@@ -11,6 +11,9 @@ struct FWidgetControllerParams;
 class USrdUserWidget;
 class USrdWidgetController;
 
+class UAbilitySystemComponent;
+class UAttributeSet;
+
 UCLASS()
 class SURROUNDED_API ASrdHUD : public AHUD
 {
@@ -30,12 +33,21 @@ public:
 	TObjectPtr<USrdUserWidget> OverlayWidget;
 
 private:
+	/*
+	 * Class of GameOverlay widget.
+	 * Showing Player's stats (e.g: mana, health, exp,...)
+	 */
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<USrdUserWidget> OverlayWidgetClass;
 
+	// Handle data syncing from Ability System to UI Overlay
 	UPROPERTY()
 	TObjectPtr<UOverlayWidgetController> OverlayWidgetController;
 
+	/*
+	 * Class of widget Handler
+	 * Transfer data from AbilitySystem to Player's stat widget
+	 */
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<USrdWidgetController> OverlayWidgetControllerClass;
 	

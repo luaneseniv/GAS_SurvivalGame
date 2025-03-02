@@ -27,7 +27,7 @@ void ASrdHUD::InitOverlayWidget(APlayerController* PC, APlayerState* PS, UAbilit
 	checkf(OverlayWidgetClass, TEXT("Overlay Widget Class is not set, Please check in BP_SrdHUD"))
 	checkf(OverlayWidgetControllerClass, TEXT("Overlay Widget Controller Class is not set, Please check in BP_SrdHUD"))
 
-	// Create new widget
+	// Create new Game overlay widget
 	OverlayWidget = CreateWidget<USrdUserWidget>(GetWorld(), OverlayWidgetClass);
 
 	// Construct params for UOverlayWidgetController
@@ -36,7 +36,7 @@ void ASrdHUD::InitOverlayWidget(APlayerController* PC, APlayerState* PS, UAbilit
 	UOverlayWidgetController* WidgetController = GetOverlayWidgetController(OverlayControllerParams);
 
 	// MUST call SetWidgetController before call BroadcastInitialValues()
-	// To make sure that WidgetController has been set in OverlayWidget
+	// To make sure that WidgetController has been set in OverlayWidget blueprint
 	OverlayWidget->SetWidgetController(WidgetController);
 
 	// Broadcast InitValue(s)
@@ -44,7 +44,7 @@ void ASrdHUD::InitOverlayWidget(APlayerController* PC, APlayerState* PS, UAbilit
 	// to: OverlayWidget
 	WidgetController->BroadcastInitialValues();
 
-	// Finally, add overlay widget to the viewport
+	// Finally, add Game overlay widget to the viewport
 	OverlayWidget->AddToViewport();
 	
 }

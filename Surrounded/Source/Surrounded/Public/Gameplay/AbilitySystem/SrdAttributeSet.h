@@ -23,10 +23,28 @@ public:
 	USrdAttributeSet();
 	
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+	
+	// OnRep
+	UFUNCTION()
+	void OnRep_Health(const FGameplayAttributeData& OldHealth) const;
 
-	// =========================
+	UFUNCTION()
+	void OnRep_MaxHealth(const FGameplayAttributeData& OldMaxHealth) const;
+
+	UFUNCTION()
+	void OnRep_Mana(const FGameplayAttributeData& OldMana) const;
+
+	UFUNCTION()
+	void OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const;
+
+	UFUNCTION()
+	void OnRep_Exp(const FGameplayAttributeData& OldExp) const;
+
+	UFUNCTION()
+	void OnRep_MaxExp(const FGameplayAttributeData& OldMaxExp) const;
+	
+public:
 	// Attributes
-	// =========================
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Health, Category = "Essential Attributes")
 	FGameplayAttributeData Health;
 	ATTRIBUTE_ACCESSORS(USrdAttributeSet, Health);
@@ -50,28 +68,5 @@ public:
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MaxExp, Category = "Essential Attributes")
 	FGameplayAttributeData MaxExp;
 	ATTRIBUTE_ACCESSORS(USrdAttributeSet, MaxExp);
-	
-
-	// =========================
-	// Called OnRep
-	// =========================
-	UFUNCTION()
-	void OnRep_Health(const FGameplayAttributeData& OldHealth) const;
-
-	UFUNCTION()
-	void OnRep_MaxHealth(const FGameplayAttributeData& OldMaxHealth) const;
-
-	UFUNCTION()
-	void OnRep_Mana(const FGameplayAttributeData& OldMana) const;
-
-	UFUNCTION()
-	void OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const;
-
-	UFUNCTION()
-	void OnRep_Exp(const FGameplayAttributeData& OldExp) const;
-
-	UFUNCTION()
-	void OnRep_MaxExp(const FGameplayAttributeData& OldMaxExp) const;
-	
 };
 

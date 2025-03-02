@@ -13,11 +13,11 @@ ASrdEnemy::ASrdEnemy()
 	// Set Default to block visibility channel
 	GetMesh()->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
 	
-	AbilitySystemComponent = CreateDefaultSubobject<USrdAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
+	AbilitySystemComponent = CreateDefaultSubobject<USrdAbilitySystemComponent>("AbilitySystemComponent");
 	AbilitySystemComponent->SetIsReplicated(true);
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
 
-	AttributeSet = CreateDefaultSubobject<USrdAttributeSet>(TEXT("AttributeSet"));
+	AttributeSet = CreateDefaultSubobject<USrdAttributeSet>("AttributeSet");
 	
 	
 }

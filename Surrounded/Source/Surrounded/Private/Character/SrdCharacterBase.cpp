@@ -8,8 +8,8 @@ ASrdCharacterBase::ASrdCharacterBase()
 {
 	PrimaryActorTick.bCanEverTick = false;
 	
-	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Weapon"));
-	Weapon->SetupAttachment(GetMesh(), FName(TEXT("weapon_main")));
+	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>("Weapon");
+	Weapon->SetupAttachment(GetMesh(), "weapon_main");
 	Weapon->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	
 }

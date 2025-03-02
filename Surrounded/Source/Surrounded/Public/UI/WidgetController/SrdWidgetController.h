@@ -8,7 +8,7 @@
 class UAttributeSet;
 class UAbilitySystemComponent;
 
-/* Passed in as params for initializing WidgetController*/
+/* Passed in as params for initializing WidgetController */
 USTRUCT(BlueprintType)
 struct FWidgetControllerParams
 {
@@ -32,7 +32,9 @@ struct FWidgetControllerParams
 	
 };
 
-
+/*
+ * Handle data syncing from Ability System to Widget
+ */
 UCLASS()
 class SURROUNDED_API USrdWidgetController : public UObject
 {
